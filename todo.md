@@ -1,4 +1,25 @@
 # TODO - Améliorations et Raccourcis
+# TODO
+
+## Améliorations
+
+1. **Configurer le fichier Swagger** :
+   - Vérifier et ajuster les définitions des routes et des modèles dans le fichier Swagger (swagger.yaml / swagger.json).
+   - S'assurer que toutes les informations nécessaires sont bien documentées et cohérentes.
+
+2. **Intégrer Swagger UI** :
+   - Ajouter ou mettre à jour la configuration de Swagger UI pour qu'il pointe vers le fichier Swagger correct.
+   - Tester l'affichage de l'API dans Swagger UI pour vérifier que toutes les routes et les détails sont correctement rendus.
+
+3. **Personnaliser le CSS** :
+   - Modifier le style par défaut de Swagger UI pour qu'il corresponde aux directives de style du projet.
+   - Ajouter des règles CSS personnalisées pour améliorer l'apparence et la lisibilité de l'interface Swagger UI.
+
+## Raccourcis
+
+- **Vérification rapide du fichier Swagger** : Utiliser des outils comme Swagger Editor pour valider le fichier Swagger avant intégration.
+- **Tests locaux de Swagger UI** : Lancer un serveur local avec Swagger UI pour tester les modifications avant de déployer sur un serveur de staging.
+- **Utilisation des variables d'environnement** : Configurer Swagger UI pour qu'il puisse utiliser des variables d'environnement pour l'URL du fichier Swagger en développement et en production.
 
 ## Améliorations à Apporter
 
