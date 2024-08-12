@@ -1,0 +1,147 @@
+openapi: 3.0.0
+info:
+  title: RPN Calculator API
+  description: API pour gérer une calculatrice en notation polonaise inversée (RPN).
+  version: 1.0.0
+paths:
+  /rpn/op:
+    get:
+      summary: List all operations
+      responses:
+        '200':
+          description: Liste des opérations disponibles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: '+'
+                  
+  /rpn/stack:
+    post:
+      summary: Create a new stack
+      responses:
+        '201':
+          description: ID de la nouvelle pile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stack_id:
+                    type: string
+                    example: 'd2d2d2d2-d2d2-d2d2-d2d2-d2d2d2d2d2d'
+    get:
+      summary: List all available stacks
+      responses:
+        '200':
+          description: Liste des ID de piles disponibles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stacks:
+                    type: array
+                    items:
+                      type: string
+                      example: 'd2d2d2d2-d2d2-d2d2-d2d2-d2d2d2d2d2d'
+                  
+  /rpn/stack/{stack_id}:
+    delete:
+      summary: Delete a stack
+      parameters:
+        - in: path
+          name: stack_id
+          required: true
+          schema:
+            type: string
+          description: ID de la pile à supprimer
+      responses:
+        '204':
+          description: La pile a été supprimée
+        '404':
+          description: Pile non trouvée
+    post:
+      summary: Push a new value to a stack
+      parameters:
+        - in: path
+          name: stack_id
+          required: true
+          schema:
+            type: string
+          description: ID de la pile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: number
+                  example: 42
+      responses:
+        '200':
+          description: Pile mise à jour
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: number
+        '404':
+          description: Pile non trouvée
+          
+    get:
+      summary: Get a stack
+      parameters:
+        - in: path
+          name: stack_id
+          required: true
+          schema:
+            type: string
+          description: ID de la pile
+      responses:
+        '200':
+          description: Contenu de la pile
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: number
+        '404':
+          description: Pile non trouvée
+
+  /rpn/op/{op}/stack/{stack_id}:
+    post:
+      summary: Apply an operation to a stack
+      parameters:
+        - in: path
+          name: op
+          required: true
+          schema:
+            type: string
+            enum: ['+', '-', '*', '/']
+          description: Opération à appliquer
+        - in: path
+          name: stack_id
+          required: true
+          schema:
+            type: string
+          description: ID de la pile
+      responses:
+        '200':
+          description: Pile après application de l'opération
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: number
+        '400':
+          description: Erreur dans l'opération ou pile invalide
+        '404':
+          description: Pile non trouvée
